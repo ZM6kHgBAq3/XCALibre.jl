@@ -15,6 +15,8 @@ struct Node{SV3<:SVector{3,<:AbstractFloat}, UR<:UnitRange{<:Integer}}
     coords::SV3     # node coordinates
     cells_range::UR # range to access neighbour cells in Mesh3.node_cells
 end
+# Add a constructor allowing an optional cells_range
+Node(coords::SVector{3, F}) where {F <: AbstractFloat} = Node(coords, 1:0) #default to empty range.
 Adapt.@adapt_structure Node
 
 

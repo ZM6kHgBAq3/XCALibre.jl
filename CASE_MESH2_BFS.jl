@@ -1,13 +1,20 @@
-using Plots
+include("src/Mesh/Mesh.jl")
 
+using Plots
+"""
 using FVM_1D.Mesh2D
 using FVM_1D.Plotting
 using FVM_1D.Discretise
 using FVM_1D.Calculate
 using FVM_1D.Models
 using FVM_1D.Solvers
+"""
 
 using Krylov
+
+using StaticArrays
+
+using Main.Mesh
 
 n_vertical      = 20 #400
 n_horizontal1   = 25 #500
@@ -25,7 +32,14 @@ p6 = Point(2.0,1.0,0.0)
 # p6 = Point(1.5,0.7,0.0)
 points = [p1, p2, p3, p4, p5, p6]
 
-scatter(points)
+# Extract x, y, z coordinates
+x_coords = [p.coords[1] for p in points]
+y_coords = [p.coords[2] for p in points]
+z_coords = [p.coords[3] for p in points]
+
+# Create the scatter plot
+scatter(x_coords, y_coords, z_coords)
+
 
 # Edges in x-direction
 e1 = line!(points,1,2,n_horizontal1)
