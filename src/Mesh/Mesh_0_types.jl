@@ -20,6 +20,23 @@ Node(coords::SVector{3, F}) where {F <: AbstractFloat} = Node(coords, 1:0) #defa
 Adapt.@adapt_structure Node
 
 
+# node old definition
+"""
+struct Node{TI, TF}
+    coords::SVector{3, TF}
+    neighbourCells::Vector{TI}
+end
+Adapt.@adapt_structure Node
+Node(TF) = begin
+    zf = zero(TF)
+    vec_3F = SVector{3,TF}(zf,zf,zf)
+    Node(vec_3F, Int64[])
+end
+Node(x::F, y::F, z::F) where F<:AbstractFloat = Node(SVector{3, F}(x,y,z), Int64[])
+Node(zero::F) where F<:AbstractFloat = Node(zero, zero, zero)
+Node(vector::F) where F<:AbstractVector = Node(vector, Int64[])
+"""
+
 """
     struct Boundary{S<:Symbol, UR<:UnitRange{<:Integer}}
         name::S         # Boundary patch name
@@ -41,7 +58,9 @@ Adapt.@adapt_structure Boundary
         faces_range::UR # range to access cell faces info (faces, neighbours cells, etc.)
     end
 """
-struct Cell{F<:AbstractFloat, SV3<:SVector{3,F},UR<:UnitRange{<:Integer}}
+
+"""
+struct Cell{F<:AbstractFloat, SV3<:SVector{3,TF},UR<:UnitRange{<:Integer}}
     centre::SV3     # coordinate of cell centroid
     volume::F       # cell volume
     nodes_range::UR # range to access cell nodes in Mesh3.cell_nodes
@@ -57,7 +76,23 @@ Cell(TI::T, TF::T) where T<:DataType = begin
         UnitRange{TI}(0,0)
         )
 end
+"""
 
+struct Cell{TI, TF}  # Removed the type constraints here
+    position::SVector{3,TF}
+    value::TF
+    x::UnitRange{TI}
+    y::UnitRange{TI}
+end
+
+Cell(TI::Type, TF::Type) = begin  # Added ::Type
+    Cell(
+        SVector{3,TF}(zero(TF),zero(TF),zero(TF)), # Use zero(TF)
+        zero(TF),
+        UnitRange{TI}(0,0),
+        UnitRange{TI}(0,0)
+        )
+end
 
 # 2D and 3D Face types
 
