@@ -31,9 +31,17 @@ Block(zi::I) where I<:Integer = begin
         zeros(I, 2, 2),zi,true
     )
 end
-
+"""
 struct MeshBuilder2D{I<:Integer,F<:AbstractFloat}
     points::Vector{Node{F}}
+    # points::Vector{Node{SV3, UR}}
+    edges::Vector{Edge{I}}
+    patches::Vector{Patch{I}}
+    blocks::Vector{Block{I}}
+end
+"""
+struct MeshBuilder2D{I<:Integer,SV3<:SVector{3,<:AbstractFloat}, UR<:UnitRange{<:Integer}}
+    points::Vector{Node{SV3, UR}}
     edges::Vector{Edge{I}}
     patches::Vector{Patch{I}}
     blocks::Vector{Block{I}}

@@ -286,19 +286,19 @@ function total_elements(builder::MeshBuilder2D{I,F}) where {I,F}
     total_elements
 end
 
-function line!(pts::Vector{Node{F}}, p1_index::I, p2_index::I, ncells::I) where {I,F}
+function line!(pts::Vector{Node{SVector{3, Float64}, UnitRange{Int64}}}, p1_index::I, p2_index::I, ncells::I) where {I <: Integer} #Added type constraint to I
     nodesID = fill(zero(I), ncells+1)
     nodesID[1] = p1_index
     nodesID[end] = p2_index
 
     p1 = pts[p1_index]
     p2 = pts[p2_index]
-    δx, normal = linear_distribution(p1, p2, ncells)
+    δx, normal = linear_distribution(p1, p2, ncells) #Make sure linear_distribution is defined.
     for j ∈ 2:ncells
         push!(pts, Node(p1.coords + δx(j-1, 1)*normal) )
         nodesID[j] = length(pts)
     end
-    return Edge(nodesID, ncells, false)
+    return Edge(nodesID, ncells, false) #Make sure Edge is defined.
 end
 
 function linear_distribution(p1::Node{F}, p2::Node{F}, ncells::I) where {I,F}
