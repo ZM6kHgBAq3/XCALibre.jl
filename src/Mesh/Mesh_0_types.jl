@@ -11,9 +11,11 @@ abstract type AbstractMesh end
         cells_range::UR # range to access neighbour cells in Mesh3.node_cells
     end
 """
-struct Node{SV3<:SVector{3,<:AbstractFloat}, UR<:UnitRange{<:Integer}}
+struct Node{SV3<:SVector{3,<:AbstractFloat}
+    #, UR<:UnitRange{<:Integer}
+    }
     coords::SV3     # node coordinates
-    cells_range::UR # range to access neighbour cells in Mesh3.node_cells
+    #cells_range::UR # range to access neighbour cells in Mesh3.node_cells
 end
 Adapt.@adapt_structure Node
 
