@@ -1,5 +1,5 @@
 export build_elements!, centres
-
+"""
 function build_elements!(multiblock::MultiBlock{I,F}) where {I,F}
     nodes = multiblock.nodes
     elements = multiblock.elements
@@ -26,7 +26,7 @@ function build_elements!(multiblock::MultiBlock{I,F}) where {I,F}
         end
     end
 end
-
+"""
 function geometric_centre(points::NTuple{N, SVector{3, F}}) where {N,F}
     sum = SVector{3, F}(0.0,0.0,0.0)
         for point ∈ points
@@ -34,7 +34,8 @@ function geometric_centre(points::NTuple{N, SVector{3, F}}) where {N,F}
         end
     return sum/(length(points))
 end
-
+"""
 function centres(elements::Vector{Element{I,F}}) where {I,F}
     [Node(elements[i].centre) for i ∈ 1:length(elements)]
 end
+"""
