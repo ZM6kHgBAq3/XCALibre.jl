@@ -33,8 +33,10 @@ Block(zi::I) where I<:Integer = begin
 end
 
 struct MeshBuilder2D{I<:Integer,F<:AbstractFloat}
-    points::Vector{Node{F}}
+    points::Vector{Node{SVector{3, F}}}
     edges::Vector{Edge{I}}
     patches::Vector{Patch{I}}
     blocks::Vector{Block{I}}
 end
+
+# MeshBuilder2D(::Vector{Node{StaticArraysCore.SVector{3, Float64}}}, ::Vector{Edge{Int64}}, ::Vector{Patch{Int64}}, ::Vector{Block{Int64}})

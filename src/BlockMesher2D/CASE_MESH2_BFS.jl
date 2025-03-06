@@ -35,7 +35,7 @@ y_coords = [p.coords[2] for p in points]
 z_coords = [p.coords[3] for p in points]
 
 # Create the scatter plot
-scatter(x_coords, y_coords, z_coords, xlabel="X", ylabel="Y", zlabel = "Z")
+#scatter(x_coords, y_coords, z_coords, xlabel="X", ylabel="Y", zlabel = "Z")
 
 # Edges in x-direction
 e1 = line!(points,1,2,n_horizontal1)
@@ -59,6 +59,7 @@ patch3 = Patch(:bottom, [1,2])
 patch4 = Patch(:top,    [3,4])
 patches = [patch1, patch2, patch3, patch4]
 
+"""
 BCs = (
     Dirichlet(:inlet, 100.0),
     Dirichlet(:outlet, 0.0),
@@ -67,7 +68,7 @@ BCs = (
     # Dirichlet(:bottom, 50.0),
     # Dirichlet(:top, 50.0)
 )
-
+"""
 
 blocks = [b1, b2]
 builder = MeshBuilder2D(points, edges, patches, blocks)
