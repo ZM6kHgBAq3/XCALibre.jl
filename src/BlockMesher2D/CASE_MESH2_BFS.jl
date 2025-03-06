@@ -1,11 +1,15 @@
+include("BlockMesher2D.jl")
+using .BlockMesher2D
 using Plots
 
+"""
 using FVM_1D.Mesh2D
 using FVM_1D.Plotting
 using FVM_1D.Discretise
 using FVM_1D.Calculate
 using FVM_1D.Models
 using FVM_1D.Solvers
+"""
 
 using Krylov
 
