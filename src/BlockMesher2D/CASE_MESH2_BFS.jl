@@ -29,7 +29,13 @@ p6 = Point(2.0,1.0,0.0)
 # p6 = Point(1.5,0.7,0.0)
 points = [p1, p2, p3, p4, p5, p6]
 
-scatter(points)
+# Extract coordinates
+x_coords = [p.coords[1] for p in points]
+y_coords = [p.coords[2] for p in points]
+z_coords = [p.coords[3] for p in points]
+
+# Create the scatter plot
+scatter(x_coords, y_coords, z_coords, xlabel="X", ylabel="Y", zlabel = "Z")
 
 # Edges in x-direction
 e1 = line!(points,1,2,n_horizontal1)
