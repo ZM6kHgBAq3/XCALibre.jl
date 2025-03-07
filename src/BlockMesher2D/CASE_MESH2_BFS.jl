@@ -70,7 +70,6 @@ BCs = (
 )
 """
 
-blocks = [b1, b2]
 builder = MeshBuilder2D(points, edges, patches, blocks)
 mesh = generate!(builder)
 

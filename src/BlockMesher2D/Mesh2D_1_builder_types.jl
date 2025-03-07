@@ -1,7 +1,8 @@
 export Point, Edge, Patch, Block
 export Wireframe, MeshBuilder2D
 
-Point(x::F, y::F, z::F) where {F<:AbstractFloat} = Node(SVector{3, F}(x,y,z))
+#Point(x::F, y::F, z::F, UR::I) where {F<:AbstractFloat, I<:Integer} = Node(SVector{3, F}(x,y,z), 1:UR)
+Point(x::F, y::F, z::F) where {F<:AbstractFloat} = Node(SVector{3, F}(x,y,z), UnitRange(0:0))
 
 struct Edge{I<:Integer}
     nodesID::Vector{I}

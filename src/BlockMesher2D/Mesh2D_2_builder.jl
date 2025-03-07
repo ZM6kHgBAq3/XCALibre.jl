@@ -203,7 +203,7 @@ function generate_inner_points!(
 end
 
 function preallocate_mesh(builder::MeshBuilder2D{I,F}) where {I,F}
-    nodes = [Node(zero(F)) for _ ∈ 1:total_points(builder)]
+    nodes = [Node(SVector(zero(F),zero(F),zero(F))) for _ ∈ 1:total_points(builder)]
     cells = [Cell(I, F) for _ ∈ 1:total_elements(builder)]
     tag_boundary_edges(builder)
     faces = [Face2D(I,F) for _ ∈ 1:total_faces(builder)]
