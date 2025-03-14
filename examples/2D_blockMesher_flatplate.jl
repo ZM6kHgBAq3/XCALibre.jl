@@ -38,7 +38,7 @@ patches = [patch1, patch2, patch3, patch4]
 blocks = [b1, b2]
 builder = MeshBuilder2D(points, edges, patches, blocks)
 mesh = generate!(builder)
-mesh_new = XCALibre.UNV2.update_mesh_format(mesh, Int64, Float64)
+mesh_new = XCALibre.UNV2.update_mesh_format(mesh, Int64, Float64) #move to end of genrerate function
 
 # Set up case for flat plate 
 
