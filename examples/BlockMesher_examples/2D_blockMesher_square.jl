@@ -1,11 +1,11 @@
 using XCALibre
 
-n_vertical      = 20 #400
-n_horizontal1   = 20 #500
+n_vertical      = 200 #400
+n_horizontal1   = 200 #500
 
 p1 = Point(0.0,0.0,0.0)
-p2 = Point(1.0,0.0,0.0)
-p3 = Point(0.0,1.0,0.0)
+p2 = Point(0.0,1.0,0.0)
+p3 = Point(1.0,0.0,0.0)
 p4 = Point(1.0,1.0,0.0)
 
 points = [p1, p2, p3, p4]
@@ -16,7 +16,7 @@ e2 = line!(points,3,4,n_horizontal1)
 
 # Edges in y-direction
 e3 = line!(points,1,3,n_vertical)
-e4 = line!(points,2,5,n_vertical)
+e4 = line!(points,2,4,n_vertical)
 edges = [e1, e2, e3, e4]
 
 b1 = quad(edges, [1,2,3,4])
@@ -28,14 +28,13 @@ patch3 = Patch(:wall, [1])
 patch4 = Patch(:top,    [2])
 patches = [patch1, patch2, patch3, patch4]
 
-blocks = [b1] # what happens if this is removed???
 builder = MeshBuilder2D(points, edges, patches, blocks)
 mesh = generate!(builder)
 mesh_new = XCALibre.UNV2.update_mesh_format(mesh, Int64, Float64) #move to end of genrerate function
 
 # Set up case for flat plate 
 
-velocity = [0.2, 0.0, 0.0]
+velocity = [0.0, 0.0, 0.0]
 nu = 1e-5
 Re = velocity[1]*1/nu
 
