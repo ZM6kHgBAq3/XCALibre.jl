@@ -1,41 +1,34 @@
 using XCALibre
 
 n_vertical      = 20 #400
-n_horizontal1   = 200 #500
-n_horizontal2   = 200 #800
+n_horizontal1   = 20 #500
 
 p1 = Point(0.0,0.0,0.0)
 p2 = Point(1.0,0.0,0.0)
-p3 = Point(2.0,0.0,0.0)
-p4 = Point(0.0,0.2,0.0)
-p5 = Point(1.0,0.2,0.0)
-p6 = Point(2.0,0.2,0.0)
+p3 = Point(0.0,1.0,0.0)
+p4 = Point(1.0,1.0,0.0)
 
-points = [p1, p2, p3, p4, p5, p6]
+points = [p1, p2, p3, p4]
 
 # Edges in x-direction
 e1 = line!(points,1,2,n_horizontal1)
-e2 = line!(points,2,3,n_horizontal2)
-e3 = line!(points,4,5,n_horizontal1)
-e4 = line!(points,5,6,n_horizontal2)
+e2 = line!(points,3,4,n_horizontal1)
 
 # Edges in y-direction
-e5 = line!(points,1,4,n_vertical)
-e6 = line!(points,2,5,n_vertical)
-e7 = line!(points,3,6,n_vertical)
-edges = [e1, e2, e3, e4, e5, e6, e7]
+e3 = line!(points,1,3,n_vertical)
+e4 = line!(points,2,5,n_vertical)
+edges = [e1, e2, e3, e4]
 
-b1 = quad(edges, [1,3,5,6])
-b2 = quad(edges, [2,4,6,7])
-blocks = [b1, b2]
+b1 = quad(edges, [1,2,3,4])
+blocks = [b1]
 
-patch1 = Patch(:inlet,  [5])
-patch2 = Patch(:outlet, [7])
-patch3 = Patch(:wall, [1,2])
-patch4 = Patch(:top,    [3,4])
+patch1 = Patch(:inlet,  [3])
+patch2 = Patch(:outlet, [4])
+patch3 = Patch(:wall, [1])
+patch4 = Patch(:top,    [2])
 patches = [patch1, patch2, patch3, patch4]
 
-blocks = [b1, b2]
+blocks = [b1] # what happens if this is removed???
 builder = MeshBuilder2D(points, edges, patches, blocks)
 mesh = generate!(builder)
 mesh_new = XCALibre.UNV2.update_mesh_format(mesh, Int64, Float64) #move to end of genrerate function
@@ -93,7 +86,7 @@ solvers = (
     )
 )
 
-runtime = set_runtime(iterations=2000, write_interval=1000, time_step=1)
+runtime = set_runtime(iterations=5000, write_interval=1000, time_step=1)
 
 # hardware = set_hardware(backend=CUDABackend(), workgroup=32)
 hardware = set_hardware(backend=CPU(), workgroup=1024)
