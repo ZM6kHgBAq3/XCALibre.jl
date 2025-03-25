@@ -1,7 +1,7 @@
 using XCALibre
 
-n_vertical      = 200 #400
-n_horizontal1   = 200 #500
+n_vertical      = 20 #400
+n_horizontal1   = 40 #500
 
 p1 = Point(0.0,0.0,0.0)
 p2 = Point(0.0,1.0,0.0)
