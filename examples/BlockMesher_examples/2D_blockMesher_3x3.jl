@@ -1,7 +1,7 @@
 using XCALibre
 
-n_vertical      = 500 #400
-n_horizontal1   = 500 #500
+n_vertical      = 300 #400
+n_horizontal1   = 300 #500
 
 p1 = Point(0.0,0.0,0.0)
 p2 = Point(1.0,0.0,0.0)
@@ -78,7 +78,7 @@ mesh_new = XCALibre.UNV2.update_mesh_format(mesh, Int64, Float64) #move to end o
 
 # Set up case for flat plate 
 
-velocity = [0.0, 0.0, 0.0]
+velocity = [0.2, 0.0, 0.0]
 nu = 1e-5
 Re = velocity[1]*1/nu
 
@@ -129,7 +129,7 @@ solvers = (
     )
 )
 
-runtime = set_runtime(iterations=1000, write_interval=100, time_step=1)
+runtime = set_runtime(iterations=5000, write_interval=1000, time_step=1)
 
 # hardware = set_hardware(backend=CUDABackend(), workgroup=32)
 hardware = set_hardware(backend=CPU(), workgroup=1024)
